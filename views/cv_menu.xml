@@ -1,0 +1,18 @@
+<odoo>
+
+    <!-- Action to open CV list -->
+
+    <act_window id="action_cv"
+        name="CV Papers"
+        res_model="cv.paper"
+        view_mode="tree,form,graph,pivot,kanban"
+    />
+
+    <!-- Menu item to open CV list -->
+
+    <menuitem id="menu_todo_task"
+        name="CV(s)"
+        action="action_cv"
+    />
+
+</odoo>

@@ -1,0 +1,156 @@
+<odoo>
+  <data>
+
+   <!-- ACTIONS -->
+    <act_window id="action_interview_button"
+      name="CV interviews"
+      res_model="calendar.event"
+      view_mode="tree,form,graph,calendar,pivot"
+      domain="[('cv_id','=', active_id)]" />
+    <!-- ACTIONS -->
+
+    <!-- Start of FORM record-->
+      <record id="view_form_cvs" model="ir.ui.view">
+        <field name="name">CVs Form</field>
+        <field name="model">cv.paper</field>
+        <field name="arch" type="xml">
+          <form string="CV">
+            <header>
+              <button name="mark_diseases" type="object" class="btn btn-primary o_form_button_edit"
+              string="Mark diseases" />
+
+              <button string="Set to concept" type="object" name="concept_progressbar"
+                      attrs="{'invisible': [('state', '=', 'concept')]}"/>
+              <!--The oe_highlight class gives the button a red color when it is saved.
+              It is usually used to indicate the expected behaviour. -->
+              <button string="Set to started" type="object" name="started_progressbar"
+                      class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/>
+              <button string="In progress" type="object" name="progress_progressbar"
+                      attrs="{'invisible': [('state','=','progress')]}"/>
+              <button string="Done" type="object" name="done_progressbar"
+                      attrs="{'invisible': [('state','=','finished')]}"/>
+              <!--This will create the statusbar, thanks to the widget. -->
+              <field name="state" widget="statusbar"/>
+            </header>
+
+            <sheet>
+
+              <!-- INTERVIEW SMART BUTTON -->
+              <div name="button_box" class="oe_button_box">
+                <button class="oe_stat_button"
+                        type="action"
+                        icon="fa-tasks"
+                        name="%(action_interview_button)d"
+                        context="{'default_cv_id': active_id}"
+                        help="All interviews for this user" >
+                <field string="Interviews" name="interviews_count" widget="statinfo"/>
+                </button>
+              </div>
+              <!-- INTERVIEW SMART BUTTON -->
+
+              <h1 style="color: #7573e5;">Basic Info</h1>
+              <hr />
+              <group col="5">
+                <field name="name"/>
+                <field name="last_title"/>
+                <field name="nationality"/>
+                <field name="birth_place"/>
+                <field name="birth_date"/>
+                <field name="last_cv_update"/>
+              </group>
+
+
+              <h1 style="color:#21932f;">Contact Details</h1>
+              <hr />
+              <group col="5">
+                <field name="mobile_no"/>
+                <field name="email" widget="email"/>
+                <field name="fb_account"/>
+                <field name="high_school"/>
+                <field name="bs_degree"/>
+                <field name="master_degree"/>
+                <field name="age"/>
+              </group>
+
+
+              <h1 style="color:blueviolet;">Experience and Language </h1>
+              <hr />
+              <group col="5">
+                <field name="your_experience"/>
+                <field name="native_lang"/>
+                <field name="secondary_lang"/>
+              </group>
+
+
+              <h1 style="color:chocolate">Personal Info</h1>
+              <hr />
+              <group col="5">
+                <field name="gender"/>
+                <field name="social_state" widget="radio"/>
+                <field name="image" widget="image" class="oe_avatar"/>
+                <field name="do_you_have_diseases"/>
+                <field name="date_created" readonly="1"/>
+                <field name="reviewers" widget="many2many_tags"></field>
+                <field name="user_id" readonly="1"></field>
+              </group>
+
+              <field name = 'certifications' >
+                <tree>
+                  <field name ='name' />
+                  <field name ='type' />
+                  <field name ='datas' />
+                </tree>
+              </field >
+
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+    <!-- End of FORM record -->
+
+
+    <!-- Start of TREE record -->
+
+    <record model="ir.ui.view" id="view_tree_cvs">
+      <field name="CVs List"></field>
+      <field name="model">cv.paper</field>
+      <field name="priority" eval="14"></field>
+      <field name="arch" type="xml">
+        <tree string="CVs Tree">
+          <field name="name"></field>
+          <field name="last_title"></field>
+          <field name="nationality"></field>
+          <field name="birth_place"></field>
+          <field name="birth_date"></field>
+          <field name="mobile_no"></field>
+        </tree>
+      </field>
+    </record>
+
+    <!-- End of TREE record -->
+
+
+    <!-- Start of SEARCH record -->
+
+  <record id="view_filter_todo_task" model="ir.ui.view">
+    <field name="name">CV Filter</field>
+    <field name="model">cv.paper</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"></field>
+        <field name="email"></field>
+        <filter name="gender" string="Males" domain="[('gender', '=', '0')]"/>
+        <filter name="gender" string="Females" domain="[('gender', '=', '1')]"/>
+        <filter name="age" string="Larger than 20 years" domain="[('age', '>', 20)]"/>
+        <filter name="nationality" string="By Nationality" context="{'group_by': 'nationality'}"/>
+        <filter name="social_state" string="By Social state" context="{'group_by': 'social_state'}"/>
+        <filter name="gender" string="By Gender" context="{'group_by': 'gender'}"/>
+      </search>
+    </field>
+  </record>
+
+    <!-- End of SEARCH record -->
+
+  </data>
+</odoo>

@@ -1,0 +1,98 @@
+<odoo>
+
+    <report id="action_cv_paper_report"
+            string="CV template"
+            model="cv.paper"
+            report_type="qweb-pdf"
+            name="cv.report_cv"
+        />
+
+    <template id="report_cv">
+        <t t-call="web.basic_layout">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h1 class="text-center">CV</h1>
+                    <br/>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2">
+                                <img class="rounded-circle" style="width: 128px; height: 128px;" t-attf-src="data:image/*;base64,{{o.image}}"/>
+                            </div>
+
+                            <div class="col-6">
+                                <br/>
+                                <h4><span t-field="o.name"></span></h4>
+                                <h6><b><i class="fas fa-edit"></i> Last Title</b>: <span t-field="o.last_title"></span></h6>
+                            </div>
+
+                            <div class="col-4">
+                                <br/>
+                                <h6><b> <i class="fa fa-at"></i> Email</b>: <span t-field="o.email"></span></h6>
+                                <h6><b> <i class="fa fa-mobile"></i> Mobile</b>: <span t-field="o.mobile_no"></span></h6>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr style="border: 1px solid orange;"/>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-4">
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-address-card"></i> Basic</h3>
+                            <h6><b><i class="fa fa-home"></i> Nationality</b>: <span t-field="o.nationality"></span></h6>
+                            <h6><b>Birth place</b>: <span t-field="o.birth_place"></span></h6>
+                            <h6><b><i class="fa fa-birthday-cake"></i> Age</b>: <span t-field="o.age"></span></h6>
+                            <h6><b><i class="far fa-calendar"></i> Last CV update</b>: <span t-field="o.last_cv_update"></span></h6>
+                            <h6><b><i class="fa fa-facebook-official"></i> FB account</b>: <span t-field="o.fb_account"></span></h6>
+                        </div>
+
+                        <div class="col-8">
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-briefcase"></i> Experience</h3>
+                            <h6><span t-field="o.your_experience"></span></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <br/>
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-american-sign-language-interpreting"></i> Languages</h3>
+                            <h6><b>Native Language</b>: <span t-field="o.native_lang"></span></h6>
+                            <h6><b>Secondary Language</b>: <span t-field="o.secondary_lang"></span></h6>
+                        </div>
+
+                        <div class="col-8">
+                            <br/>
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-graduation-cap"></i> High school education</h3>
+                            <h6><span t-field="o.high_school"></span></h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-user-circle"></i> Personal</h3>
+                            <h6><b><i class="fas fa-venus-mars"></i> Social state</b>: <span t-field="o.social_state"></span></h6>
+                            <h6><b><i class="fas fa-transgender"></i> Gender</b>: <span t-field="o.gender"></span></h6>
+                        </div>
+
+                        <div class="col-8">
+                            <br/>
+                            <h3 style="color: orange; text-decoration: underline;">
+                                <i class="fas fa-graduation-cap"></i> B.S. degree education</h3>
+                            <h6><span t-field="o.bs_degree"></span></h6>
+                        </div>
+                    </div>
+                </div>
+                <p style="page-break-after:always;"> </p>
+            </t>
+        </t>
+       </t>
+    </template>
+</odoo>
